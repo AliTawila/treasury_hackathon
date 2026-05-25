@@ -114,6 +114,14 @@ Requirements:
 - Node.js 18 or later and npm
 - Optional: Docker Desktop for one-command service startup
 
+On macOS, if `npm` is not available:
+
+```bash
+brew install node
+node --version
+npm --version
+```
+
 Backend setup:
 
 ```bash
