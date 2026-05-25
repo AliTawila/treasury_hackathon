@@ -1,0 +1,6 @@
+row_id,date,description,credit_amount,debit_amount,currency
+row_001,2026-05-18,Local transfer OFFICE RENT,1850.00,,MYR
+row_002,2026-05-19,Card settlement MARKETPLACE,277.40,,MYR
+row_003,2026-05-20,Incoming wire INV-2026-0412 Pacific Retail,421.50,,MYR
+row_004,2026-05-20,Incoming wire INV-2026-0420,408.00,,MYR
+row_005,2026-05-23,Incoming wire OTHER CUSTOMER,612.35,,MYR

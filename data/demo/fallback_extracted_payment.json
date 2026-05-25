@@ -1,0 +1,11 @@
+{
+  "sender": "Pacific Retail Sdn Bhd",
+  "receiver": "Northstar Design LLC",
+  "amount_sent": 100.0,
+  "currency_sent": "USD",
+  "date": "2026-05-20",
+  "reference": "INV-2026-0412",
+  "method": "International Wire Transfer",
+  "extraction_confidence": 0.97,
+  "warnings": []
+}

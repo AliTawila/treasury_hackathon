@@ -1,0 +1,65 @@
+{
+  "job_id": "demo_001",
+  "status": "matched",
+  "confidence": 1.0,
+  "invoice": {
+    "invoice_number": "INV-2026-0412",
+    "payer": "Pacific Retail Sdn Bhd",
+    "payee": "Northstar Design LLC",
+    "amount": 100.0,
+    "currency": "USD",
+    "date": "2026-05-20",
+    "due_date": "2026-05-30",
+    "extraction_confidence": 0.98,
+    "warnings": []
+  },
+  "payment": {
+    "sender": "Pacific Retail Sdn Bhd",
+    "receiver": "Northstar Design LLC",
+    "amount_sent": 100.0,
+    "currency_sent": "USD",
+    "date": "2026-05-20",
+    "reference": "INV-2026-0412",
+    "method": "International Wire Transfer",
+    "extraction_confidence": 0.97,
+    "warnings": []
+  },
+  "best_match": {
+    "row_id": "row_003",
+    "date": "2026-05-20",
+    "description": "Incoming wire INV-2026-0412 Pacific Retail",
+    "credit_amount": 421.5,
+    "debit_amount": null,
+    "currency": "MYR"
+  },
+  "fx_trace": {
+    "base_currency": "USD",
+    "target_currency": "MYR",
+    "rate_date": "2026-05-20",
+    "input_amount": 100.0,
+    "rate": 4.33,
+    "converted_amount": 433.0,
+    "source": "local_fallback_fx_rates",
+    "fallback_used": true
+  },
+  "fee_trace": {
+    "rule_name": "incoming_wire",
+    "currency": "MYR",
+    "gross_amount": 433.0,
+    "percentage_rate": 0.015,
+    "percentage_fee": 6.5,
+    "flat_fee": 5.0,
+    "total_fee": 11.5,
+    "expected_credit": 421.5
+  },
+  "score_breakdown": {
+    "date_score": 1.0,
+    "reference_score": 1.0,
+    "amount_score": 1.0,
+    "date_weight": 0.3,
+    "reference_weight": 0.3,
+    "amount_weight": 0.4
+  },
+  "explanation": "INV-2026-0412 was matched to a MYR 421.50 bank credit on 2026-05-20 after the recorded FX and fee adjustments.",
+  "warnings": []
+}

@@ -1,0 +1,12 @@
+{
+  "dated_rates": {
+    "2026-05-20:USD_MYR": 4.33,
+    "2026-05-20:SGD_MYR": 3.37,
+    "2026-05-20:EUR_MYR": 4.89
+  },
+  "default_rates": {
+    "USD_MYR": 4.33,
+    "SGD_MYR": 3.37,
+    "EUR_MYR": 4.89
+  }
+}
