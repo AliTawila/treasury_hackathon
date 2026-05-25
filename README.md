@@ -51,33 +51,68 @@ The application implements this path:
 
 ## Team Structure
 
-| Role | Focus |
-|---|---|
-| Role 1 - Agent Lead / Backend | FastAPI orchestration, schemas, provider wrappers, integration |
-| Role 2 - Data Engineer | FX, fees, matcher, report/export, demo data |
-| Role 3 - Frontend Developer | Dashboard, upload UX, result visualization, API calls |
-| Role 4 - Pitch / Demo / QA | Slides, README, screenshots, walkthrough, QA |
+| Role | Member | Branch | Primary Ownership |
+|---|---|---|---|
+| Role 1 | Hemdan | `backend/extraction` | FastAPI orchestration, Morpheus/Chutes wrappers, schema approval |
+| Role 2 | Tawila | `backend/matching` | FX, fees, matcher, demo cases, PDF/CSV artifacts, tests |
+| Role 3 | Youssef | `frontend/dashboard` | Dashboard, case selector, upload-ready UI, API calls |
+| Role 4 | Shafey | `demo/docs` | README/deck polish, screenshots, demo script, QA |
 
 See [docs/context.md](docs/context.md) for branch ownership, checkpoints, and the
 locked API contract.
 
+## Current Baseline
+
+The shared `main` baseline already includes:
+
+- FastAPI health, demo, reconciliation, PDF report, and CSV audit endpoints.
+- Deterministic USD/MYR FX conversion, fee calculation, and transaction scoring.
+- Local extraction, FX, and complete-result fallback fixtures for offline demo mode.
+- A React/Vite dashboard that loads the golden-path result and downloads artifacts.
+- A committed architecture diagram and local run instructions.
+
+Next integration target: Tawila adds deterministic `matched`, `needs_review`, and
+`unmatched` demo cases on `backend/matching`; after review and merge, Youssef exposes
+those cases in the dashboard without changing the response model.
+
 ## Branch Workflow
 
-`main` is the integration branch. Role owners work on short-lived branches:
+`main` is the shared integration branch. Pull this coordination baseline before creating
+your assigned branch:
 
 ```bash
 git checkout main
 git pull origin main
 git checkout -b backend/extraction
+```
+
+Use only your branch command:
+
+```bash
+# Tawila
 git checkout -b backend/matching main
+
+# Youssef
 git checkout -b frontend/dashboard main
+
+# Shafey
 git checkout -b demo/docs main
 ```
 
-Commit in small working units, open pull requests into `main`, and have Role 1 merge
-only after the shared contract and demo endpoint still pass. Before each checkpoint,
-every branch pulls `main`, resolves conflicts on its own branch, and reruns its smoke
-test.
+Commit in small working units and open pull requests into `main`. Hemdan reviews and
+merges integration or contract-sensitive work after endpoint smoke checks pass. Before
+updating a pull request:
+
+```bash
+git checkout main
+git pull origin main
+git checkout <your-branch>
+git merge main
+```
+
+Merge order for the submission path: Role 2 deterministic cases and tests, Role 3 case
+switcher, Role 1 live provider enhancements only when stable, then Role 4 final
+screenshots and documentation polish.
 
 ## Folder Structure
 
@@ -197,6 +232,9 @@ docker compose up
 }
 ```
 
+The `ReconciliationResult` shape is frozen for parallel development. Hemdan approves
+any contract change before another branch depends on it.
+
 Structured POST example:
 
 ```bash
@@ -242,3 +280,20 @@ adapters can be connected later without changing the API contract.
 - Confirm `POST /api/reconcile` returns the same field structure as demo.
 - Confirm PDF and CSV links download generated artifacts.
 - Record the final demo in `DEMO_MODE=true` after the above checks pass.
+
+## Start Here Today
+
+| Member | First Task | Handoff Required |
+|---|---|---|
+| Hemdan | Keep schemas/routes stable and review backend PRs | Confirm API smoke checks after merges |
+| Tawila | Add and test deterministic match/review/unmatched cases | Provide stable demo case URLs and artifacts |
+| Youssef | Keep current dashboard usable while waiting for case URLs | Add case switch UI after Role 2 merges |
+| Shafey | Prepare deck/script against the verified baseline | Capture matched and needs-review flow after integration |
+
+Immediate sequence:
+
+1. Pull `main` and create only your assigned branch.
+2. Tawila completes the deterministic demo-case pull request.
+3. Youssef connects the named cases in the UI.
+4. Hemdan integrates provider work without moving money calculations into AI.
+5. Shafey captures the stable offline walkthrough and final materials.
