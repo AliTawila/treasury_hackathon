@@ -140,6 +140,22 @@ Live Morpheus/upload UI verification on May 26, 2026:
 - `backend/.env` was not printed, modified, or committed; only key presence/length was
   checked during diagnostics.
 
+Hosted deployment update on May 26, 2026:
+- Frontend is deployed at `https://global-treasury-agent.vercel.app/`.
+- Backend is deployed at `https://global-treasury-agent.onrender.com/`; health check is
+  `https://global-treasury-agent.onrender.com/api/health`.
+- Vercel must set `VITE_API_URL=https://global-treasury-agent.onrender.com`.
+- Render must set `CORS_ORIGINS=https://global-treasury-agent.vercel.app` so browser
+  uploads from the hosted frontend can call `/api/upload` and `/api/reconcile`.
+- The earlier hosted GUI `NetworkError when attempting to fetch resource` was traced to
+  a missing/disallowed CORS origin on Render, not to a frontend API URL mismatch.
+- The deployed CORS preflight for `OPTIONS /api/upload` now returns `200` with
+  `Access-Control-Allow-Origin: https://global-treasury-agent.vercel.app`.
+- Postman smoke collection now defaults to the Render backend, includes a Vercel-origin
+  CORS preflight check, and uses the live FX upload test files by default.
+- Keep `backend/.env` local only; hosted secrets belong in Render/Vercel environment
+  variables and must not be committed.
+
 Immediate branch work:
 
 | Member | In Progress Next | Expected Handoff |

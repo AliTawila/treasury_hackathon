@@ -76,6 +76,23 @@ The shared `main` baseline already includes:
   dark/light mode.
 - A committed architecture diagram and local run instructions.
 
+## Hosted Demo
+
+- Frontend: `https://global-treasury-agent.vercel.app/`
+- Backend API: `https://global-treasury-agent.onrender.com/`
+- Backend health check: `https://global-treasury-agent.onrender.com/api/health`
+- Repository PR: `https://github.com/AliTawila/treasury_hackathon/pull/6`
+
+Deployment environment notes:
+
+- Vercel frontend must set `VITE_API_URL=https://global-treasury-agent.onrender.com`.
+- Render backend must set `CORS_ORIGINS=https://global-treasury-agent.vercel.app`.
+- Keep provider secrets in Render/Vercel environment variables only; do not commit `.env`.
+
+If the hosted GUI shows `NetworkError when attempting to fetch resource`, check the
+backend CORS setting first. The browser must receive an `Access-Control-Allow-Origin`
+response for `https://global-treasury-agent.vercel.app`.
+
 Current Role 1/2 integration: CSV/XLSX bank-export parsing, live dated FX lookup with
 safe local fallback, multipart upload orchestration, Morpheus vision extraction, PDF
 reports, and CSV audit exports are wired into the shared API contract. The frontend
@@ -335,9 +352,20 @@ Frankfurter is reachable:
 ## Postman Smoke Tests
 
 Import [docs/postman/treasury-ai-reconciliation-agent.postman_collection.json](docs/postman/treasury-ai-reconciliation-agent.postman_collection.json)
-into Postman and run it against `http://localhost:8000` with `DEMO_MODE=true`.
+into Postman. The collection defaults to the hosted Render backend:
+`https://global-treasury-agent.onrender.com`.
 
-The upload request uses these repo-local demo files:
+For local testing, change the collection variable `base_url` to
+`http://localhost:8000` and run the backend with `DEMO_MODE=true`.
+
+The collection includes a CORS preflight request for the hosted Vercel origin and a
+live upload request using these repo-local files:
+
+- `data/demo/live_fx_upload_test/invoice_INV-LIVE-2026-0526.png`
+- `data/demo/live_fx_upload_test/payment_proof_INV-LIVE-2026-0526.png`
+- `data/demo/live_fx_upload_test/bank_statement_live_fx.csv`
+
+For offline-only local upload testing, swap the upload request files to:
 
 - `data/demo/sample_invoice.pdf`
 - `data/demo/sample_payment_proof.pdf`

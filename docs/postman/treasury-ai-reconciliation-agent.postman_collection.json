@@ -2,7 +2,7 @@
   "info": {
     "_postman_id": "1c6c9d64-7770-45cf-9d1d-2bb9a6c3b1f1",
     "name": "Treasury AI Reconciliation Agent",
-    "description": "Smoke-test collection for the AI Marathon 2026 Global Treasury Agent API. Run with DEMO_MODE=true for offline-safe verification.",
+    "description": "Smoke-test collection for the AI Marathon 2026 Global Treasury Agent API. Defaults to the hosted Render backend; change base_url to http://localhost:8000 for local DEMO_MODE=true verification.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
@@ -22,6 +22,41 @@
               "pm.test('health is ok', function () {",
               "  pm.response.to.have.status(200);",
               "  pm.expect(pm.response.json().status).to.eql('ok');",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CORS Preflight - Vercel Upload",
+      "request": {
+        "method": "OPTIONS",
+        "header": [
+          {
+            "key": "Origin",
+            "value": "{{frontend_url}}"
+          },
+          {
+            "key": "Access-Control-Request-Method",
+            "value": "POST"
+          },
+          {
+            "key": "Access-Control-Request-Headers",
+            "value": "content-type"
+          }
+        ],
+        "url": "{{base_url}}/api/upload"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('hosted frontend origin is allowed', function () {",
+              "  pm.response.to.have.status(200);",
+              "  pm.expect(pm.response.headers.get('Access-Control-Allow-Origin')).to.eql(pm.collectionVariables.get('frontend_url'));",
               "});"
             ]
           }
@@ -98,7 +133,7 @@
       ]
     },
     {
-      "name": "Upload Files",
+      "name": "Upload Files - Live FX Sample",
       "request": {
         "method": "POST",
         "header": [],
@@ -108,17 +143,17 @@
             {
               "key": "invoice",
               "type": "file",
-              "src": "data/demo/sample_invoice.pdf"
+              "src": "data/demo/live_fx_upload_test/invoice_INV-LIVE-2026-0526.png"
             },
             {
               "key": "payment_proof",
               "type": "file",
-              "src": "data/demo/sample_payment_proof.pdf"
+              "src": "data/demo/live_fx_upload_test/payment_proof_INV-LIVE-2026-0526.png"
             },
             {
               "key": "bank_statement",
               "type": "file",
-              "src": "data/demo/sample_bank_statement.csv"
+              "src": "data/demo/live_fx_upload_test/bank_statement_live_fx.csv"
             }
           ]
         },
@@ -134,7 +169,10 @@
               "  pm.response.to.have.status(200);",
               "  const json = pm.response.json();",
               "  pm.expect(json.job_id).to.match(/^upload_/);",
-              "  pm.expect(['matched', 'needs_review', 'unmatched']).to.include(json.status);",
+              "  pm.expect(json.status).to.eql('matched');",
+              "  pm.expect(json.invoice.invoice_number).to.eql('INV-LIVE-2026-0526');",
+              "  pm.expect(json.best_match.row_id).to.eql('live_row_002');",
+              "  pm.expect(json.fee_trace.expected_credit).to.eql(968.92);",
               "  pm.collectionVariables.set('job_id', json.job_id);",
               "});"
             ]
@@ -222,7 +260,11 @@
   "variable": [
     {
       "key": "base_url",
-      "value": "http://localhost:8000"
+      "value": "https://global-treasury-agent.onrender.com"
+    },
+    {
+      "key": "frontend_url",
+      "value": "https://global-treasury-agent.vercel.app"
     },
     {
       "key": "job_id",
