@@ -18,7 +18,7 @@ This repository satisfies the preliminary submission documentation requirements:
 | Requirement | Where |
 |---|---|
 | System requirements and dependencies | [System Requirements](#system-requirements), [Install Dependencies](#install-dependencies) |
-| Step-by-step local run instructions | [Local Quick Start](#local-quick-start) |
+| Step-by-step local run instructions | [Local Quick Start](#local-quick-start) | or directly use it at https://global-treasury-agent.vercel.app/
 | Working prototype endpoints | [API Reference](#api-reference) |
 | Agent framework diagram | [Agent Workflow Diagram](#agent-workflow-diagram) |
 | Source code explanation | [Code Explanation](#code-explanation) |
@@ -36,9 +36,9 @@ Recommended hosted deployment split:
 
 Use these submission placeholders until final URLs are assigned:
 
-- Frontend URL: `https://<vercel-project>.vercel.app`
-- Backend URL: `https://<render-service>.onrender.com`
-- API docs: `https://<render-service>.onrender.com/docs`
+- Frontend URL: `https://global-treasury-agent.vercel.app/`
+- Backend URL: `https://global-treasury-agent.onrender.com/`
+- API docs: `https://global-treasury-agent.onrender.com/docs`
 
 ## System Requirements
 
