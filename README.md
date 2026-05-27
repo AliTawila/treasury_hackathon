@@ -319,49 +319,7 @@ sequenceDiagram
     F->>B: GET /api/report/{job_id} and /api/export/{job_id}
 ```
 
-## Optional Diagram Prompts For GLM / Z.ai
 
-Use these if you want image-based diagrams for the pitch deck. Keep the labels
-faithful to the Mermaid diagrams above.
-
-Prompt 1, architecture diagram:
-
-```text
-Create a clean finance-operations architecture diagram for an AI Marathon 2026
-project named Treasurer.ai. Show this flow: User -> Vercel React/Vite
-Dashboard -> Render FastAPI Backend -> Upload/Demo/Reconcile API routes ->
-Morpheus-compatible extraction using gemma-4-31b primary and gemma-4-26b-a4b
-fallback -> deterministic Python normalization -> Frankfurter FX service with
-local fallback -> deterministic fee engine -> deterministic matcher -> Chutes
-explanation boundary using Qwen/Qwen3-32B-TEE and zai-org/GLM-5.1-TEE -> PDF
-report and CSV audit log -> result returned to dashboard. Visually separate AI
-steps from deterministic code steps. Use green for deterministic finance logic,
-purple for AI extraction/explanation, and blue for hosted infrastructure. Avoid
-generic AI brain graphics. Make it readable on one 16:9 slide.
-```
-
-Prompt 2, trust boundary diagram:
-
-```text
-Create a 16:9 slide diagram titled "AI where it helps. Code where it counts."
-for a treasury reconciliation product. Left side: AI boundary with Morpheus
-document extraction and Chutes explanation. Right side: deterministic Python
-boundary with field validation, dated FX lookup, bank fee calculation, match
-scoring, status decision, PDF/CSV artifact generation. Add a bottom guardrail:
-"No LLM calculates money, confidence, status, or report values." Use a
-professional audit-ready finance dashboard style with restrained colors.
-```
-
-Prompt 3, demo calculation diagram:
-
-```text
-Design a 16:9 calculation trace slide for invoice INV-2026-0412. Show USD
-100.00 multiplied by USD/MYR 4.3300 equals MYR 433.00. Then show incoming wire
-fee equals 1.5% plus MYR 5.00, total MYR 11.50. Then show expected bank credit
-MYR 421.50 and actual bank credit MYR 421.50 with matched status. Use a
-ledger/audit-trace visual style, not a marketing hero page. Highlight that all
-money math is deterministic code.
-```
 
 ## API Reference
 
@@ -541,10 +499,6 @@ cd frontend
 npm run build
 ```
 
-Postman smoke tests:
-
-- Optional local Postman collections can be kept under ignored `docs/` material.
-- Run smoke requests against `http://localhost:8000` with `DEMO_MODE=true`.
 
 ## Fallback And Safety Strategy
 
@@ -564,8 +518,7 @@ typed invoice/payment fields, `/api/upload` returns a clear `422` response.
 
 ## Known Limitations
 
-- Demo scenarios are synthetic treasury test transactions, created for safe
-  public judging.
+
 - Batch reconciliation and persistent database storage are future work.
 - Accounting integrations such as QuickBooks or Xero are planned extensions, not
   current production features.
@@ -577,10 +530,10 @@ typed invoice/payment fields, `/api/upload` returns a clear `422` response.
 
 | Role | Member | Primary Ownership |
 |---|---|---|
-| Role 1 | Hemdan | Backend orchestration, Morpheus/Chutes wrappers, schemas |
-| Role 2 | Tawila | FX, fees, matching, bank parser, reports, tests |
-| Role 3 | Youssef | React dashboard, scenario selector, upload UI |
-| Role 4 | Shafey | Demo script, deck, screenshots, QA |
+| Role 1 | Mohamed Hemdan | Backend orchestration, Morpheus/Chutes wrappers, schemas |
+| Role 2 | Ali Tawila | FX, fees, matching, bank parser, reports, tests |
+| Role 3 | Youssef Ghazy | React dashboard, scenario selector, upload UI |
+| Role 4 | Ahmed Shafey | deck, screenshots, QA |
 
 ## Future Improvements
 
