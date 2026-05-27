@@ -64,7 +64,7 @@ def fetch_fx_rate(
 
     if base != target:
         live_mode = (
-            os.getenv("DEMO_MODE", "true").lower() == "false"
+            os.getenv("DEMO_MODE", "false").lower() == "false"
             if use_live is None
             else use_live
         )

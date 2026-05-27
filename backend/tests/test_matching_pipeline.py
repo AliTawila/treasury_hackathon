@@ -132,7 +132,10 @@ def test_fee_rules_are_deterministic(
         ("unmatched", "unmatched"),
     ],
 )
-def test_matcher_produces_each_review_status(case_name: str, expected_status: str) -> None:
+def test_matcher_produces_each_review_status(
+    monkeypatch: pytest.MonkeyPatch, case_name: str, expected_status: str
+) -> None:
+    monkeypatch.setenv("DEMO_MODE", "true")
     extractor = MorpheusExtractor()
     invoice = extractor.extract_invoice()
     payment = extractor.extract_payment_proof()

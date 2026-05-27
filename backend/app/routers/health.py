@@ -12,7 +12,7 @@ router = APIRouter(prefix="/api/health", tags=["health"])
 
 @router.get("", response_model=HealthResponse)
 def health_check() -> HealthResponse:
-    demo_mode = os.getenv("DEMO_MODE", "true").lower() != "false"
+    demo_mode = os.getenv("DEMO_MODE", "false").lower() != "false"
     return HealthResponse(
         status="ok",
         service="Treasurer.ai",

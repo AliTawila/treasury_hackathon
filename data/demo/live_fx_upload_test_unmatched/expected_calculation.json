@@ -14,5 +14,5 @@
   "expected_credit": 421.5,
   "bank_statement_contains_matching_reference": false,
   "expected_status": "unmatched",
-  "note": "In DEMO_MODE=true, uploads use deterministic fallback extraction for the invoice/payment fields and the uploaded bank statement drives the unmatched outcome."
+  "note": "When DEMO_MODE=true, uploads use deterministic fallback extraction for the invoice/payment fields and the uploaded bank statement drives the unmatched outcome."
 }

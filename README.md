@@ -40,7 +40,7 @@ Recommended hosted deployment split:
 |---|---|---|---|
 | Dashboard | Vercel | React/Vite static frontend | Set `VITE_API_URL` to the Render backend URL. |
 | API | Render | FastAPI web service | Run from `backend/` with `uvicorn app.main:app --host 0.0.0.0 --port $PORT`. |
-| Local fallback demo | Docker or local terminals | Frontend + backend | Works without provider keys or internet when `DEMO_MODE=true`. |
+| Local fallback demo | Docker or local terminals | Frontend + backend | Set `DEMO_MODE=true` to run without provider keys or internet. |
 
 ## System Requirements
 
@@ -154,7 +154,7 @@ Hosted deployment variables:
 | Service | Variable | Value |
 |---|---|---|
 | Vercel frontend | `VITE_API_URL` | Render backend URL |
-| Render backend | `DEMO_MODE` | `true` for judged fallback demo, `false` for live provider test |
+| Render backend | `DEMO_MODE` | Defaults to `false`; set `true` only for judged fallback demo |
 | Render backend | `CORS_ORIGINS` | Vercel frontend URL |
 | Render backend | `MORPHEUS_*`, `CHUTES_*` | Optional live provider settings |
 
@@ -202,10 +202,11 @@ curl -X POST http://localhost:8000/api/upload \
 ```
 
 You can also upload those same three files through the dashboard while the app is
-running. In the default `DEMO_MODE=true`, the invoice/payment extraction uses
-the deterministic fallback values for `INV-2026-0412`, and the uploaded bank
-statement is parsed normally. That statement intentionally omits a matching
-`MYR 421.50` credit, so the expected result is:
+running. For offline fallback testing, set `DEMO_MODE=true`; then the
+invoice/payment extraction uses the deterministic fallback values for
+`INV-2026-0412`, and the uploaded bank statement is parsed normally. That
+statement intentionally omits a matching `MYR 421.50` credit, so the expected
+result is:
 
 - `status`: `unmatched`
 - `invoice.invoice_number`: `INV-2026-0412`

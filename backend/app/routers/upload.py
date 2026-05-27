@@ -20,7 +20,7 @@ BANK_EXTENSIONS = {".csv", ".xlsx"}
 
 
 def _demo_mode_enabled() -> bool:
-    return os.getenv("DEMO_MODE", "true").lower() != "false"
+    return os.getenv("DEMO_MODE", "false").lower() != "false"
 
 
 def _used_local_extraction_fallback(*warnings: list[str]) -> bool:

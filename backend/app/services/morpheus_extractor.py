@@ -49,7 +49,7 @@ class MorpheusExtractor:
         self.base_url = (os.getenv("MORPHEUS_BASE_URL") or "https://api.mor.org/api/v1").rstrip("/")
         self.model = os.getenv("MORPHEUS_MODEL") or "gemma-4-31b"
         self.fast_model = os.getenv("MORPHEUS_FAST_MODEL") or "gemma-4-26b-a4b"
-        self.fallback_mode = os.getenv("DEMO_MODE", "true").lower() != "false" or not self.api_key
+        self.fallback_mode = os.getenv("DEMO_MODE", "false").lower() != "false" or not self.api_key
 
     def _fallback_invoice(self, warning: Optional[str] = None) -> InvoiceData:
         invoice = InvoiceData(**_load_json("fallback_extracted_invoice.json"))

@@ -5,7 +5,7 @@ services:
     volumes:
       - .:/workspace
     environment:
-      DEMO_MODE: "true"
+      DEMO_MODE: "false"
       CORS_ORIGINS: http://localhost:5173
     ports:
       - "8000:8000"
