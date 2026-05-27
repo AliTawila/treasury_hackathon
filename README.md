@@ -134,16 +134,6 @@ Default local service URLs:
 
 ## Environment Configuration
 
-The default `DEMO_MODE=true` keeps the application stable without API keys or
-network access.
-
-```bash
-DEMO_MODE=true
-CORS_ORIGINS=http://localhost:5173,http://localhost:3000
-FX_API_URL=https://api.frankfurter.dev/v2
-FX_API_TIMEOUT_SECONDS=3
-```
-
 Optional live provider configuration:
 
 ```bash
